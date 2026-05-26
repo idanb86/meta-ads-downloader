@@ -59,6 +59,5 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; style-src 'self'; img-src 'self' https://storage.ko-fi.com; default-src 'self'"
   },
-  "homepage_url": "https://github.com/idanbirenberg/meta-ads-downloader",
-  "default_locale": "en"
+  "homepage_url": "https://github.com/idanbirenberg/meta-ads-downloader"
 }
