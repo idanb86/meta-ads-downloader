@@ -413,37 +413,37 @@ Tell me which product you want to feature (I'll answer), then create a **full Na
 
   // ─── Build single-ad prompt ───────────────────────────────────────────────
   function buildAnalysisPrompt(data) {
-    const brand = data.brandName || data.advertiser || 'לא זוהה';
-    const formatHebrew = { video: 'סרטון', static: 'תמונה סטטית', carousel: 'קרוסלה' }[data.format] || data.format;
+    const brand = data.brandName || data.advertiser || 'Not detected';
+    const formatHebrew = { video: 'Video', static: 'Image static', carousel: 'Carousel' }[data.format] || data.format;
 
     let runningSignal = '';
-    if (data.daysRunning >= 90)     runningSignal = `✅ ${data.daysRunning} ימים — Winner מוכח`;
-    else if (data.daysRunning >= 30) runningSignal = `🟡 ${data.daysRunning} ימים — מבטיח`;
-    else if (data.daysRunning > 0)   runningSignal = `🔵 ${data.daysRunning} ימים — מודעה חדשה`;
+    if (data.daysRunning >= 90)     runningSignal = `✅ ${data.daysRunning} days — Proven winner`;
+    else if (data.daysRunning >= 30) runningSignal = `🟡 ${data.daysRunning} days — Promising`;
+    else if (data.daysRunning > 0)   runningSignal = `🔵 ${data.daysRunning} days — New ad`;
 
     const mediaUrl = data.videoUrl || data.imageUrl || '';
-    const mediaType = data.videoUrl ? 'סרטון' : 'תמונה';
+    const mediaType = data.videoUrl ? 'Video' : 'Image';
     const mediaNote = mediaUrl
-      ? `${mediaType} (לינק): ${mediaUrl}\n💡 מומלץ: הורד את ה${mediaType} עם כפתור "הורד" וצרף אותו ישירות לשיחה — הלינקים של Meta פוקעים תוך שעות.`
+      ? `${mediaType} (link): ${mediaUrl}\n💡 Recommended: Download the ${mediaType} using the "Download" and attach it to the chat — Meta links expire within hours.`
       : '';
 
-    return `מודעת מתחרה מ-Meta Ads Library:
+    return `Competitor ad from Meta Ads Library:
 
-מותג: ${brand}
-פורמט: ${formatHebrew}${data.cta ? `\nCTA: ${data.cta}` : ''}${data.platforms.length ? `\nפלטפורמות: ${data.platforms.join(', ')}` : ''}${runningSignal ? `\nזמן הרצה: ${runningSignal}` : ''}${data.hasMultipleVersions ? `\nגרסאות: יש מספר וריאנטים` : ''}
+Brand: ${brand}
+Format: ${formatHebrew}${data.cta ? `\nCTA: ${data.cta}` : ''}${data.platforms.length ? `\nPlatforms: ${data.platforms.join(', ')}` : ''}${runningSignal ? `\nRunning time: ${runningSignal}` : ''}${data.hasMultipleVersions ? `\nVersions: multiple variants exist` : ''}
 
-טקסט:
-${data.adText || 'לא זוהה'}
+Ad copy:
+${data.adText || 'Not detected'}
 ${mediaNote ? `\n${mediaNote}` : ''}
 
 ---
 
-נתח את המודעה:
-- Hook, Value Prop, Pain Points, קהל יעד
-- ציון 1–10 לכל מרכיב (Hook / Copy / CTA / ויזואל) + ציון כולל${data.daysRunning >= 30 ? `\n- למה לדעתך זה רץ כבר ${data.daysRunning} יום?` : ''}
+Analyze the ad:
+- Hook, Value Prop, Pain Points, Target audience
+- Score 1–10 for each element (Hook / Copy / CTA / Visual) + overall score${data.daysRunning >= 30 ? `\n- Why do you think this has been running for ${data.daysRunning} days?` : ''}
 
-לאחר מכן צור 3 וריאציות חדשות בהשראת המודעה — כל אחת בזווית שיווקית שונה (emotion / social proof / problem-solution).
-לכל וריאציה: Hook + Body (2–4 משפטים) + CTA + הסבר קצר על הזווית.`;
+Then create 3 new variations inspired by this ad — each with a different marketing angle (emotion / social proof / problem-solution).
+For each variation: Hook + Body (2–4 sentences) + CTA + brief explanation of the angle.`;
   }
 
   // ─── Build batch prompt ───────────────────────────────────────────────────
@@ -461,29 +461,29 @@ ${mediaNote ? `\n${mediaNote}` : ''}
    "${text}"`;
     }).join('\n\n');
 
-    return `ניתוח batch — ${adsData.length} מודעות מ-Meta Ads Library:
-(${winners.length} winners 90d+, ${promising.length} מבטיחות 30d+)
+    return `Batch analysis — ${adsData.length} ads from Meta Ads Library:
+(${winners.length} winners 90d+, ${promising.length} promising 30d+)
 
 ${adLines}
 
 ---
 
-1. מה הדפוסים החוזרים בין המודעות שרצות הכי הרבה זמן?
+1. What patterns repeat among the longest-running ads?
    (hook patterns, offer types, emotional triggers, formats)
 
-2. מה ה-CTA הנפוץ ביותר? מה זה אומר על הקהל?
+2. What is the most common CTA? What does it say about the audience?
 
-3. מה בולט לרעה — מה לא עובד?
+3. What stands out negatively — what is not working?
 
-4. בהתבסס על הדפוסים האלה, כתוב 2 מודעות "מסונתזות" למוצרים שלנו
-   שמשלבות את הטוב מכל הwinners.`;
+4. Based on these patterns, write 2 "synthesized" ads for our products
+   that combine the best elements from all winners.`;
   }
 
   // ─── Find card helpers ────────────────────────────────────────────────────
   function findSeeAdDetailsBtn(card) {
     for (const el of card.querySelectorAll('div[role="button"], button')) {
       const text = el.textContent?.trim().toLowerCase() || '';
-      if (text === 'see ad details' || text === 'see summary details' || text === 'ראה פרטי מודעה') {
+      if (text === 'see ad details' || text === 'see summary details' || text === 'see ad details') {
         if (el.closest('[data-mad-card]') === card || !el.closest('[data-mad-card]')) return el;
       }
     }
@@ -536,7 +536,7 @@ ${adLines}
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
-      <span>הורד</span>`);
+      <span>Download</span>`);
     dlBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); handleDownloadClick(dlBtn, card); });
 
     // Analyze
@@ -544,7 +544,7 @@ ${adLines}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
       </svg>
-      <span>נתח</span>`);
+      <span>Analyze</span>`);
     anBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); handleAnalyzeClick(anBtn, card); });
 
     // Copy URL
@@ -553,12 +553,12 @@ ${adLines}
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
       </svg>`);
-    cpBtn.title = 'העתק כתובת מדיה';
+    cpBtn.title = 'Copy media URL';
     cpBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); handleCopyClick(cpBtn, card); });
 
     // Nano Banana
     const nbBtn = makeBtn('mad-nano', `<span style="font-size:15px">🍌</span>`);
-    nbBtn.title = 'צור prompt ל-Nano Banana';
+    nbBtn.title = 'Generate Nano Banana prompt';
     nbBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); handleNanoClick(nbBtn, card); });
 
     container.append(dlBtn, anBtn, cpBtn, nbBtn);
@@ -582,7 +582,7 @@ ${adLines}
 
     const videoEls = card.querySelectorAll('video');
     if (videoEls.length > 0 && !items.find(i => i.type === 'video')) {
-      setLoading(btn, 'טוען...');
+      setLoading(btn, 'Loading...');
       try {
         watchVideo(videoEls[0]);
         await videoEls[0].play();
@@ -596,19 +596,19 @@ ${adLines}
       resetBtn(btn, 'mad-download');
     }
 
-    if (!items.length) { showToast('לא נמצאה מדיה', 'error'); return; }
+    if (!items.length) { showToast('No media found', 'error'); return; }
     if (items.length === 1) await doDownload(btn, items[0]);
     else showPicker(btn, items, (item) => doDownload(btn, item));
   }
 
   // ─── Analyze handler ──────────────────────────────────────────────────────
   async function handleAnalyzeClick(btn, card) {
-    setLoading(btn, 'אוסף...');
+    setLoading(btn, 'Collecting...');
     const adData = extractAdData(card);
     await saveToHistory(adData);
     const prompt = buildAnalysisPrompt(adData);
     resetBtn(btn, 'mad-analyze');
-    showPromptPopup(prompt, `ניתוח מודעה — ${adData.brandName || adData.advertiser || 'מתחרה'}`);
+    showPromptPopup(prompt, `Ad Analysis — ${adData.brandName || adData.advertiser || 'Competitor'}`);
   }
 
   // ─── Nano Banana handler ──────────────────────────────────────────────────
@@ -618,7 +618,7 @@ ${adLines}
   async function handleCopyClick(btn, card) {
     scanPerfEntries();
     const items = getCardMedia(card);
-    if (!items.length) { showToast('לא נמצאה מדיה. נגן קודם.', 'error'); return; }
+    if (!items.length) { showToast('No media found. play it first.', 'error'); return; }
     if (items.length === 1) await copyUrl(btn, items[0].url);
     else showPicker(btn, items, (item) => copyUrl(btn, item.url));
   }
@@ -633,7 +633,7 @@ ${adLines}
     const orig = btn.innerHTML;
     btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
     btn.classList.add('mad-done');
-    showToast('הכתובת הועתקה! 📋', 'success');
+    showToast('URL copied! 📋', 'success');
     setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('mad-done'); }, 2500);
   }
 
@@ -649,7 +649,7 @@ ${adLines}
         <line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/>
         <line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
       </svg>
-      <span>נתח batch</span>
+      <span>Analyze batch</span>
     `;
 
     btn.addEventListener('click', handleBatchClick);
@@ -658,13 +658,13 @@ ${adLines}
 
   async function handleBatchClick() {
     const btn = document.querySelector('.mad-batch-btn');
-    if (btn) { btn.style.opacity = '0.6'; btn.querySelector('span').textContent = 'אוסף...'; }
+    if (btn) { btn.style.opacity = '0.6'; btn.querySelector('span').textContent = 'Collecting...'; }
 
     // Collect all processed cards
     const cards = Array.from(document.querySelectorAll('[data-mad-card]'));
     if (cards.length === 0) {
-      showToast('לא נמצאו מודעות — גלול בדף תחילה', 'error');
-      if (btn) { btn.style.opacity = ''; btn.querySelector('span').textContent = 'נתח batch'; }
+      showToast('No ads found — scroll the page first', 'error');
+      if (btn) { btn.style.opacity = ''; btn.querySelector('span').textContent = 'Analyze batch'; }
       return;
     }
 
@@ -673,19 +673,19 @@ ${adLines}
 
     const prompt = buildBatchPrompt(adsData);
 
-    if (btn) { btn.style.opacity = ''; btn.querySelector('span').textContent = 'נתח batch'; }
+    if (btn) { btn.style.opacity = ''; btn.querySelector('span').textContent = 'Analyze batch'; }
 
-    showPromptPopup(prompt, `Batch — ${adsData.length} מודעות`);
+    showPromptPopup(prompt, `Batch — ${adsData.length} ads`);
   }
 
   // ─── Prompt popup ─────────────────────────────────────────────────────────
-  function showPromptPopup(prompt, title = 'פרומפט מוכן', mediaUrl = '') {
+  function showPromptPopup(prompt, title = 'Prompt ready', mediaUrl = '') {
     document.querySelector('.mad-prompt-popup')?.remove();
 
     const mediaRow = mediaUrl ? `
         <div class="mad-pp-media">
           <input class="mad-pp-url" type="text" readonly value="${mediaUrl}" />
-          <button class="mad-pp-url-copy" title="העתק לינק">📋</button>
+          <button class="mad-pp-url-copy" title="Copy link">📋</button>
         </div>` : '';
 
     const overlay = document.createElement('div');
@@ -699,8 +699,8 @@ ${adLines}
         <textarea class="mad-pp-text" readonly>${prompt}</textarea>
         ${mediaRow}
         <div class="mad-pp-actions">
-          <button class="mad-pp-copy-btn">📋 העתק טקסט</button>
-          <button class="mad-pp-open-btn">פתח Claude ←</button>
+          <button class="mad-pp-copy-btn">📋 Copy text</button>
+          <button class="mad-pp-open-btn">Open Claude ←</button>
         </div>
       </div>`;
 
@@ -719,9 +719,9 @@ ${adLines}
       textarea.select();
       try { await navigator.clipboard.writeText(prompt); }
       catch(e) { document.execCommand('copy'); }
-      copyBtn.textContent = '✅ הועתק!';
+      copyBtn.textContent = '✅ Copied!';
       copyBtn.style.background = '#0a4d2a';
-      setTimeout(() => { copyBtn.textContent = '📋 העתק טקסט'; copyBtn.style.background = ''; }, 2000);
+      setTimeout(() => { copyBtn.textContent = '📋 Copy text'; copyBtn.style.background = ''; }, 2000);
     });
 
     if (urlCopy) {
@@ -746,19 +746,19 @@ ${adLines}
   // ─── Download helper ──────────────────────────────────────────────────────
   async function doDownload(btn, item) {
     const orig = btn.innerHTML;
-    setLoading(btn, 'מוריד...');
+    setLoading(btn, 'Downloading...');
     try {
       const ext = item.type === 'video' ? 'mp4' : 'jpg';
       const filename = `MetaAd_${new Date().toISOString().slice(0,10)}.${ext}`;
       const resp = await chrome.runtime.sendMessage({ type: 'DOWNLOAD', url: item.url, filename });
-      if (resp && !resp.success) throw new Error(resp.error || 'נכשל');
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>הורד ✓</span>`;
+      if (resp && !resp.success) throw new Error(resp.error || 'failed');
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Download ✓</span>`;
       btn.classList.add('mad-done');
-      showToast('ההורדה החלה! 🎉', 'success');
+      showToast('הDownload started! 🎉', 'success');
       setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('mad-done'); btn.style.pointerEvents = ''; }, 3000);
     } catch(err) {
       btn.innerHTML = orig; btn.style.pointerEvents = '';
-      showToast('שגיאה: ' + err.message, 'error');
+      showToast('Error: ' + err.message, 'error');
     }
   }
 
@@ -770,8 +770,8 @@ ${adLines}
   function resetBtn(btn, type) {
     btn.style.pointerEvents = '';
     const icons = {
-      'mad-download': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>הורד</span>`,
-      'mad-analyze':  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>נתח</span>`,
+      'mad-download': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Download</span>`,
+      'mad-analyze':  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>Analyze</span>`,
     };
     if (icons[type]) btn.innerHTML = icons[type];
   }
@@ -784,14 +784,14 @@ ${adLines}
 
     const title = document.createElement('div');
     title.className = 'mad-picker-title';
-    title.textContent = 'בחר:';
+    title.textContent = 'Select:';
     picker.appendChild(title);
 
     items.slice(0, 8).forEach((item, i) => {
       const row = document.createElement('button');
       row.className = 'mad-picker-item';
       const ext = item.type === 'video' ? 'mp4' : 'jpg';
-      row.innerHTML = `<span>${item.type === 'video' ? '🎬' : '🖼️'} ${item.type === 'video' ? 'סרטון' : 'תמונה'} ${i+1}</span><span class="mad-picker-ext">.${ext}</span>`;
+      row.innerHTML = `<span>${item.type === 'video' ? '🎬' : '🖼️'} ${item.type === 'video' ? 'Video' : 'Image'} ${i+1}</span><span class="mad-picker-ext">.${ext}</span>`;
       row.addEventListener('click', () => { picker.remove(); onSelect(item); });
       picker.appendChild(row);
     });
@@ -820,7 +820,7 @@ ${adLines}
     scanPerfEntries();
     document.querySelectorAll('div[role="button"], button').forEach(el => {
       const text = el.textContent?.trim().toLowerCase() || '';
-      if (text === 'see ad details' || text === 'see summary details' || text === 'ראה פרטי מודעה') {
+      if (text === 'see ad details' || text === 'see summary details' || text === 'see ad details') {
         let card = el;
         for (let i = 0; i < 12; i++) {
           card = card.parentElement;

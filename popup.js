@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (isAdsLibrary) {
     statusDot.classList.add('active');
-    statusText.textContent = 'פעיל — ספריית המודעות';
+    statusText.textContent = 'Active — Ads Library';
   } else {
     statusDot.classList.add('inactive');
-    statusText.textContent = 'לא בספריית המודעות';
+    statusText.textContent = 'Not on Ads Library';
   }
 
   // ── History ────────────────────────────────────────────────────────
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
-          <p>עוד לא ניתחת מודעות</p>
+          <p>No ads analyzed yet</p>
         </div>`;
       return;
     }
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const winners = history.filter(h => h.daysRunning >= 90).length;
     const statsDiv = document.createElement('div');
     statsDiv.style.cssText = 'font-size:11px;color:rgba(255,255,255,0.45);padding:4px 2px 8px;direction:rtl;';
-    statsDiv.textContent = `${history.length} מודעות נותחו | ${winners} winners 90d+`;
+    statsDiv.textContent = `${history.length} ads analyzed | ${winners} winners 90d+`;
     mediaList.appendChild(statsDiv);
 
     history.slice(0, 15).forEach(item => {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const clearDiv = document.createElement('div');
     clearDiv.style.cssText = 'margin-top:10px;text-align:center;';
     const clearBtn = document.createElement('button');
-    clearBtn.textContent = 'נקה היסטוריה';
+    clearBtn.textContent = 'Clear history';
     clearBtn.style.cssText = 'background:none;border:none;color:rgba(255,255,255,0.25);font-size:11px;cursor:pointer;';
     clearBtn.addEventListener('click', async () => {
       await chrome.storage.local.remove('madHistory');

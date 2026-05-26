@@ -1,47 +1,46 @@
-# Meta Ads Downloader & Analyzer 🎬
+# Meta Ads Downloader & Analyzer
 
-A Chrome extension to download videos/images from Meta Ads Library and generate AI analysis prompts for Claude.
+A Chrome extension to download videos and images from Meta Ads Library, analyze competitor ads with AI, and build your creative swipe file.
 
-## Features
+## Installation
 
-- **⬇ Download** — grab videos and images from any ad in one click
-- **🤖 Analyze** — generates a ready-to-paste prompt to analyze the ad in Claude (hook, value prop, scoring, 3 new ad variations)
-- **📋 Copy URL** — copy the media link directly
-- **🍌 Nano Banana** — generate a visual-creation prompt based on a winning ad
-- **🏆 Winner Tags** — auto-tags ads by how long they've been running (90d+ = proven winner)
-- **📊 Batch Analysis** — analyze all visible ads at once for pattern detection
-- **📚 History** — tracks analyzed ads in the popup
+**From Chrome Web Store** *(recommended)*
+> [Install from Chrome Web Store](#) ← replace with your store link after publishing
 
-## Installation (Developer Mode)
-
-1. Go to `chrome://extensions/`
-2. Enable **Developer mode** (top-right)
-3. Click **Load unpacked**
-4. Select the `meta-ads-downloader-public` folder
-5. Go to [facebook.com/ads/library](https://www.facebook.com/ads/library/)
-
-## Usage
-
-1. Search any advertiser or keyword in Meta Ads Library
-2. Buttons appear below each "See ad details" button
-3. **Download:** play the video first (a second or two), then click ⬇
-4. **Analyze:** click 🤖 → copy the prompt → paste into Claude
-
-## How It Works
-
-- Captures media URLs via the browser's `PerformanceObserver` API (CSP-safe, no script injection)
-- Per-video tracking ties each download button to its specific ad
-- Analysis prompts open a new Claude chat — paste and send
-
-## Notes
-
-- Meta's media URLs expire after a few hours — for visual analysis, download the file and attach it to Claude directly
-- Some videos load as blob URLs — play them first so the extension can capture the real URL
-
-## Tech
-
-Manifest V3 · No external dependencies · No data leaves your browser
+**Manual install** *(developer)*
+1. Download the ZIP from [Releases](../../releases)
+2. Extract the folder
+3. Go to `chrome://extensions/` → enable **Developer mode** → click **Load unpacked** → select the folder
 
 ---
 
-Created by **Idan Birenberg**
+## Features
+
+| Button | What it does |
+|--------|-------------|
+| ⬇ **Download** | Save the ad video or image to your computer |
+| 🤖 **Analyze** | Generate a ready-to-paste Claude AI prompt for deep ad analysis + 3 new ad variations |
+| 📋 **Copy URL** | Copy the media link to clipboard |
+| 🍌 **Nano Banana** | Generate a visual creation prompt based on the winning ad |
+| 🏆 **Winner tags** | Automatic badges showing how long each ad has been running (90d+ = proven winner) |
+| 👁️ **Competitor watchlist** | Highlights competitors in orange — managed from the popup |
+
+## How to use
+
+1. Go to [facebook.com/ads/library](https://www.facebook.com/ads/library/)
+2. Search for any advertiser or keyword
+3. Buttons appear below each **"See ad details"** button on every ad card
+4. To download a video — play it for 2–3 seconds first, then click ⬇
+
+## Notes
+
+- Meta media URLs expire after a few hours — for visual analysis, download the file and attach it to Claude directly
+- The extension stores your watchlist and analysis history locally on your device only — no data is sent anywhere
+
+## Privacy
+
+[Privacy Policy](https://idanb86.github.io/meta-ads-downloader/privacy-policy.html)
+
+---
+
+Created by **Biren**
