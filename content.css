@@ -1,0 +1,330 @@
+/* Meta Ads Downloader & Analyzer v1.0 */
+
+/* ── Winner Tags ─────────────────────────────────────────────────── */
+.mad-winner-tag {
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+  z-index: 100 !important;
+  padding: 3px 9px !important;
+  border-radius: 20px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.mad-tag-gold {
+  background: rgba(200, 160, 0, 0.92) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(200,160,0,0.4) !important;
+}
+
+.mad-tag-green {
+  background: rgba(16, 120, 60, 0.88) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(16,120,60,0.35) !important;
+}
+
+.mad-tag-blue {
+  background: rgba(30, 80, 180, 0.85) !important;
+  color: #fff !important;
+}
+
+/* ── Button Container ────────────────────────────────────────────── */
+.mad-btn-container {
+  display: flex !important;
+  gap: 6px !important;
+  width: calc(100% - 32px) !important;
+  margin: 6px 16px 2px !important;
+  box-sizing: border-box !important;
+}
+
+/* ── Card Buttons ────────────────────────────────────────────────── */
+.mad-card-btn {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 9px 10px !important;
+  border-radius: 8px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  box-sizing: border-box !important;
+  user-select: none !important;
+  border: 1.5px solid !important;
+  white-space: nowrap !important;
+}
+
+.mad-download {
+  background: #1a1a2e !important;
+  color: #c8a97e !important;
+  border-color: #c8a97e !important;
+}
+.mad-download:hover {
+  background: #c8a97e !important;
+  color: #1a1a2e !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 12px rgba(200,169,126,0.35) !important;
+}
+
+.mad-analyze {
+  background: linear-gradient(135deg, #e8611a 0%, #cc4e0f 100%) !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+.mad-analyze:hover {
+  background: linear-gradient(135deg, #f0721f 0%, #d9581a 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 12px rgba(232,97,26,0.4) !important;
+}
+
+.mad-copy {
+  flex: 0 0 36px !important;
+  padding: 9px 0 !important;
+  background: #1a1a2e !important;
+  color: rgba(200,169,126,0.7) !important;
+  border-color: rgba(200,169,126,0.35) !important;
+}
+.mad-copy:hover {
+  background: rgba(200,169,126,0.1) !important;
+  color: #c8a97e !important;
+  border-color: #c8a97e !important;
+}
+
+.mad-nano {
+  flex: 0 0 36px !important;
+  padding: 9px 0 !important;
+  background: #2a2410 !important;
+  border-color: rgba(240,200,60,0.45) !important;
+}
+.mad-nano:hover {
+  background: rgba(240,200,60,0.18) !important;
+  border-color: rgba(240,200,60,0.8) !important;
+  transform: translateY(-1px) !important;
+}
+
+.mad-card-btn:active { transform: translateY(0) scale(0.97) !important; }
+.mad-card-btn svg { flex-shrink: 0 !important; }
+
+.mad-card-btn.mad-done {
+  background: #0a4d2a !important;
+  border-color: #10a34a !important;
+  color: #5ae09a !important;
+}
+
+@keyframes mad-spin { to { transform: rotate(360deg); } }
+.mad-spin { animation: mad-spin 0.8s linear infinite !important; }
+
+/* ── Batch Button (floating) ─────────────────────────────────────── */
+.mad-batch-btn {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 2147483640 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 11px 18px !important;
+  background: #1a1a2e !important;
+  color: #c8a97e !important;
+  border: 1.5px solid #c8a97e !important;
+  border-radius: 24px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+  transition: all 0.18s ease !important;
+}
+.mad-batch-btn:hover {
+  background: #c8a97e !important;
+  color: #1a1a2e !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(200,169,126,0.35) !important;
+}
+
+/* ── Prompt Popup ────────────────────────────────────────────────── */
+.mad-prompt-popup {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.65) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(3px) !important;
+  animation: mad-pop 0.18s ease !important;
+}
+.mad-pp-box {
+  background: #1a1a2e !important;
+  border: 1px solid rgba(200,169,126,0.3) !important;
+  border-radius: 14px !important;
+  width: 580px !important;
+  max-width: 92vw !important;
+  max-height: 82vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7) !important;
+  overflow: hidden !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+.mad-pp-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 18px !important;
+  border-bottom: 1px solid rgba(200,169,126,0.15) !important;
+  flex-shrink: 0 !important;
+}
+.mad-pp-title { font-size: 14px !important; font-weight: 700 !important; color: #c8a97e !important; }
+.mad-pp-close {
+  background: none !important; border: none !important;
+  color: rgba(255,255,255,0.4) !important; font-size: 16px !important;
+  cursor: pointer !important; padding: 2px 6px !important;
+  border-radius: 4px !important; line-height: 1 !important;
+}
+.mad-pp-close:hover { background: rgba(255,255,255,0.1) !important; color: #fff !important; }
+.mad-pp-text {
+  flex: 1 !important; margin: 0 !important; padding: 14px 18px !important;
+  background: rgba(0,0,0,0.3) !important; color: #e8ddd0 !important;
+  border: none !important; font-family: monospace !important;
+  font-size: 12px !important; line-height: 1.6 !important;
+  resize: none !important; outline: none !important;
+  overflow-y: auto !important; min-height: 260px !important;
+  direction: rtl !important; text-align: right !important;
+}
+.mad-pp-actions {
+  display: flex !important; gap: 10px !important;
+  padding: 14px 18px !important;
+  border-top: 1px solid rgba(200,169,126,0.15) !important;
+  flex-shrink: 0 !important;
+}
+.mad-pp-copy-btn {
+  flex: 1 !important; padding: 10px !important;
+  background: #1a1a2e !important; color: #c8a97e !important;
+  border: 1.5px solid #c8a97e !important; border-radius: 8px !important;
+  font-size: 13px !important; font-weight: 700 !important;
+  font-family: inherit !important; cursor: pointer !important;
+  transition: all 0.15s !important;
+}
+.mad-pp-copy-btn:hover { background: #c8a97e !important; color: #1a1a2e !important; }
+.mad-pp-open-btn {
+  flex: 1 !important; padding: 10px !important;
+  background: linear-gradient(135deg, #e8611a 0%, #cc4e0f 100%) !important;
+  color: #fff !important; border: none !important; border-radius: 8px !important;
+  font-size: 13px !important; font-weight: 700 !important;
+  font-family: inherit !important; cursor: pointer !important;
+  transition: all 0.15s !important;
+}
+.mad-pp-open-btn:hover { background: linear-gradient(135deg, #f0721f 0%, #d9581a 100%) !important; }
+
+/* Media URL row in popup */
+.mad-pp-media {
+  display: flex !important;
+  gap: 6px !important;
+  padding: 10px 18px 0 !important;
+  flex-shrink: 0 !important;
+}
+.mad-pp-url {
+  flex: 1 !important;
+  padding: 8px 10px !important;
+  background: rgba(0,0,0,0.3) !important;
+  color: rgba(200,169,126,0.75) !important;
+  border: 1px solid rgba(200,169,126,0.2) !important;
+  border-radius: 7px !important;
+  font-family: monospace !important;
+  font-size: 11px !important;
+  direction: ltr !important;
+  text-align: left !important;
+  outline: none !important;
+}
+.mad-pp-url-copy {
+  flex: 0 0 38px !important;
+  background: rgba(200,169,126,0.12) !important;
+  border: 1px solid rgba(200,169,126,0.3) !important;
+  border-radius: 7px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: background 0.15s !important;
+}
+.mad-pp-url-copy:hover { background: rgba(200,169,126,0.25) !important; }
+
+/* ── Picker ──────────────────────────────────────────────────────── */
+.mad-picker {
+  min-width: 190px !important; background: #1a1a2e !important;
+  border: 1px solid rgba(200,169,126,0.3) !important; border-radius: 12px !important;
+  padding: 6px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.7) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  animation: mad-pop 0.15s ease !important;
+}
+.mad-picker-title {
+  font-size: 11px !important; font-weight: 600 !important;
+  color: rgba(200,169,126,0.5) !important; text-transform: uppercase !important;
+  letter-spacing: 1px !important; padding: 5px 10px 7px !important;
+}
+.mad-picker-item {
+  display: flex !important; align-items: center !important; gap: 8px !important;
+  width: 100% !important; padding: 9px 10px !important;
+  background: transparent !important; color: #f0e6d3 !important;
+  border: none !important; border-radius: 8px !important; font-size: 13px !important;
+  font-family: inherit !important; cursor: pointer !important;
+  direction: rtl !important; text-align: right !important; transition: background 0.1s !important;
+}
+.mad-picker-item:hover { background: rgba(200,169,126,0.12) !important; }
+.mad-picker-ext { margin-right: auto !important; font-size: 11px !important; color: rgba(200,169,126,0.4) !important; font-family: monospace !important; }
+
+/* ── Toast ───────────────────────────────────────────────────────── */
+.mad-toast {
+  position: fixed !important; bottom: 80px !important; left: 50% !important;
+  transform: translateX(-50%) translateY(16px) !important;
+  z-index: 2147483647 !important; padding: 10px 22px !important;
+  background: #1a1a2e !important; color: #f0e6d3 !important;
+  border-radius: 28px !important; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 13px !important; font-weight: 500 !important;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.6) !important; opacity: 0 !important;
+  transition: all 0.22s ease !important; pointer-events: none !important;
+  border: 1px solid rgba(200,169,126,0.2) !important; white-space: nowrap !important;
+}
+.mad-toast--visible { opacity: 1 !important; transform: translateX(-50%) translateY(0) !important; }
+.mad-toast--success { background: #0a4d2a !important; }
+.mad-toast--error   { background: #4d0a0a !important; }
+.mad-toast--info    { background: #0a1a3d !important; }
+
+@keyframes mad-pop {
+  from { opacity:0; transform:translateY(-4px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* ── Competitor Watchlist highlight ──────────────────────────────── */
+.mad-competitor {
+  outline: 2.5px solid #e8611a !important;
+  outline-offset: -1px !important;
+  border-radius: 4px !important;
+}
+
+.mad-comp-tag {
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+  z-index: 101 !important;
+  padding: 3px 9px !important;
+  background: #e8611a !important;
+  color: #fff !important;
+  border-radius: 20px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 8px rgba(232,97,26,0.45) !important;
+}
+
+.mad-competitor .mad-winner-tag { top: 38px !important; }

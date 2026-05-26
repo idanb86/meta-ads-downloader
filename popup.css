@@ -1,0 +1,289 @@
+/* popup.css — Meta Ads Downloader & Analyzer */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      background: #0e1016;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d52 100%); border-bottom: 2px solid #c8a97e;
+      padding: 18px 20px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .header p {
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+
+    .status-bar {
+      background: #161b22;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #666;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .status-dot.active { background: #10a34a; box-shadow: 0 0 6px #10a34a; }
+    .status-dot.inactive { background: #e05252; }
+
+    .status-text { color: rgba(255,255,255,0.7); }
+
+    .body { padding: 16px; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .media-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 200px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.1) transparent;
+    }
+
+    .media-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: right;
+    }
+
+    .media-item:hover {
+      background: rgba(24, 119, 242, 0.15);
+      border-color: rgba(24, 119, 242, 0.3);
+    }
+
+    .media-item-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #1877f2;
+    }
+
+    .media-item-info { flex: 1; min-width: 0; }
+
+    .media-item-type {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .media-item-url {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .download-btn-small {
+      background: #c8a97e; color: #1a1a2e;
+      border: none;
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+
+    .download-btn-small:hover { background: #0a5ec4; }
+
+    .empty-state {
+      text-align: center;
+      padding: 20px 10px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .empty-state svg {
+      opacity: 0.3;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #c8a97e; color: #1a1a2e;
+      color: white;
+    }
+    .btn-primary:hover { background: #b8956a; }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 14px 0;
+    }
+
+    .tip {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: auto;
+    }
+
+    .badge-video { background: rgba(99, 88, 255, 0.25); color: #a59aff; }
+    .badge-image { background: rgba(16, 163, 74, 0.25); color: #5ae09a; }
+  
+/* Watchlist section */
+.watchlist-section { margin-bottom: 12px; }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.watchlist-textarea {
+  width: 100%;
+  min-height: 64px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  resize: vertical;
+  direction: ltr;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.save-watchlist-btn {
+  margin-top: 6px;
+  padding: 7px;
+  font-size: 12px;
+}
+
+.kofi-wrapper {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.credit-line {
+  text-align: center;
+  font-size: 10px;
+  color: rgba(255,255,255,0.22);
+  margin-top: 8px;
+}
